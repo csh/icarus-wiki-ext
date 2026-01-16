@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "IcarusWikiExtension (Package)": {
+      "commandName": "MsixPackage",
+      "doNotLaunchApp": true
+    },
+    "IcarusWikiExtension (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
