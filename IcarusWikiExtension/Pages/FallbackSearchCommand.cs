@@ -11,7 +11,7 @@ public sealed partial class FallbackSearchCommand : FallbackCommandItem, IDispos
 
     private readonly IcarusWikiExtensionPage _searchCommand;
     
-    public FallbackSearchCommand() : base(new IcarusWikiExtensionPage(), Resources.quick_search_fmt)
+    public FallbackSearchCommand() : base(new IcarusWikiExtensionPage(), Resources.quick_search)
     {
         Icon = Icons.IcarusIcon;
         Title = string.Empty;
