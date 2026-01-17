@@ -186,7 +186,7 @@ internal sealed partial class IcarusWikiExtensionPage : DynamicListPage, IDispos
 
             var listItems = results.Select(IListItem (result) => new ListItem(new OpenUrlCommand(result.Url!)
             {
-                Result = CommandResult.Dismiss()
+                Result = CommandResult.Hide()
             })
             {
                 Title = result.Title
@@ -234,6 +234,7 @@ internal sealed partial class IcarusWikiExtensionPage : DynamicListPage, IDispos
 
         _disposed = true;
 
+        SetSearchNoUpdate(string.Empty);
         ItemsChanged -= OnItemsChanged;
         lock (_exceptionLock)
         {

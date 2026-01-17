@@ -17,6 +17,9 @@
     <Company>csh</Company>
     <Product>ICARUS Wiki Extension</Product>
     <NeutralLanguage>en-GB</NeutralLanguage>
+      
+    <AssemblyTitle>ICARUS Wiki Extension</AssemblyTitle>
+    <ApplicationIcon>Assets/Icarus.ico</ApplicationIcon> 
   </PropertyGroup>
 
   <ItemGroup>
