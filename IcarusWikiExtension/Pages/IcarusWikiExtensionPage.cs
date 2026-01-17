@@ -48,7 +48,7 @@ internal sealed partial class IcarusWikiExtensionPage : DynamicListPage, IDispos
     public IcarusWikiExtensionPage()
     {
         _site = new WikiSite(Client, new SiteOptions("https://icarus.fandom.com/api.php"));
-
+        Title = Resources.icarus_wiki_search;
         ItemsChanged += OnItemsChanged;
         RaiseItemsChanged(0);
     }
@@ -186,7 +186,7 @@ internal sealed partial class IcarusWikiExtensionPage : DynamicListPage, IDispos
 
             var listItems = results.Select(IListItem (result) => new ListItem(new OpenUrlCommand(result.Url!)
             {
-                Result = CommandResult.Hide()
+                Result = CommandResult.Dismiss()
             })
             {
                 Title = result.Title

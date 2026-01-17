@@ -157,5 +157,23 @@ namespace IcarusWikiExtension {
                 return ResourceManager.GetString("no_results_subtitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick Search.
+        /// </summary>
+        internal static string quick_search {
+            get {
+                return ResourceManager.GetString("quick_search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search ICARUS wiki: &quot;{0}&quot;.
+        /// </summary>
+        internal static string quick_search_fmt {
+            get {
+                return ResourceManager.GetString("quick_search_fmt", resourceCulture);
+            }
+        }
     }
 }

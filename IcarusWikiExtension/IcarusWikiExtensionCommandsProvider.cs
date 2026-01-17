@@ -8,6 +8,7 @@ public sealed partial class IcarusWikiExtensionCommandsProvider : CommandProvide
 {
     private readonly ICommandItem[] _commands;
     private readonly IcarusWikiExtensionPage? _searchPage;
+    private readonly FallbackSearchCommand _fallbackSearchCommand;
 
     public IcarusWikiExtensionCommandsProvider()
     {
@@ -15,6 +16,7 @@ public sealed partial class IcarusWikiExtensionCommandsProvider : CommandProvide
         Id = "IcarusWiki";
         Icon = Icons.IcarusIcon;
         
+        _fallbackSearchCommand = new FallbackSearchCommand();
         _commands =
         [
             new ListItem(_searchPage = new IcarusWikiExtensionPage())
@@ -46,8 +48,17 @@ public sealed partial class IcarusWikiExtensionCommandsProvider : CommandProvide
 
     public override ICommandItem[] TopLevelCommands() => _commands;
 
+    public override IFallbackCommandItem[]? FallbackCommands()
+    {
+        return
+        [
+            _fallbackSearchCommand
+        ];
+    }
+
     public override void Dispose()
     {
+        _fallbackSearchCommand?.Dispose();
         _searchPage?.Dispose();
         base.Dispose();
         GC.SuppressFinalize(this);

@@ -29,6 +29,13 @@
     <data name="icarus_wiki_search_subtitle" xml:space="preserve">
         <value>Search the ICARUS wiki quickly.</value>
     </data>
+    <data name="quick_search" xml:space="preserve">
+        <value>Quick Search</value>
+    </data>
+    <data name="quick_search_fmt" xml:space="preserve">
+        <value>Search ICARUS wiki: "{0}"</value>
+        <comment>{0} will be replaced with the search term</comment>
+    </data>
     <data name="icarus_intel" xml:space="preserve">
         <value>Interactive Map via Icarus Intel</value>
     </data>
