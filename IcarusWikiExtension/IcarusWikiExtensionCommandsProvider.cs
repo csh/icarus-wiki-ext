@@ -15,6 +15,7 @@ public sealed partial class IcarusWikiExtensionCommandsProvider : CommandProvide
         DisplayName = Resources.icarus_ext_display_name;
         Id = "IcarusWiki";
         Icon = Icons.IcarusIcon;
+        Settings = IcarusWikiSettings.Instance.Settings;
         
         _fallbackSearchCommand = new FallbackSearchCommand();
         _commands =
@@ -23,13 +24,14 @@ public sealed partial class IcarusWikiExtensionCommandsProvider : CommandProvide
             {
                 Icon = this.Icon,
                 Title = Resources.icarus_wiki_search,
-                Subtitle = Resources.icarus_wiki_search_subtitle
+                Subtitle = Resources.icarus_wiki_search_subtitle,
+                MoreCommands = [new CommandContextItem(IcarusWikiSettings.Instance.Settings.SettingsPage)]
             },
             new ListItem(new OpenUrlCommand("https://icarusintel.com/")
             {
                 Icon = this.Icon,
                 Name = Resources.icarus_intel,
-                Result = CommandResult.Dismiss()
+                Result = CommandResult.Dismiss(),
             })
             {
                 Subtitle = Resources.icarus_intel_subtitle,
@@ -58,6 +60,7 @@ public sealed partial class IcarusWikiExtensionCommandsProvider : CommandProvide
 
     public override void Dispose()
     {
+        IcarusWikiSettings.Instance.Dispose();
         _fallbackSearchCommand?.Dispose();
         _searchPage?.Dispose();
         base.Dispose();

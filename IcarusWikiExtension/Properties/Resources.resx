@@ -57,6 +57,12 @@
     <data name="no_results_subtitle" xml:space="preserve">
         <value>We couldn't find any pages matching your query.</value>
     </data>
+    <data name="wiki_service" xml:space="preserve">
+        <value>Wiki Service</value>
+    </data>
+    <data name="wiki_service_subtitle" xml:space="preserve">
+        <value>Which wiki should the extension use for search?</value>
+    </data>
     <data name="error" xml:space="preserve">
         <value>Error</value>
     </data>

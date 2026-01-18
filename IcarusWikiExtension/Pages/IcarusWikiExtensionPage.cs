@@ -15,7 +15,7 @@ internal sealed partial class IcarusWikiExtensionPage : DynamicListPage, IDispos
 {
     private readonly Lazy<WikiClient> _lazyClient = new(() => new WikiClient
     {
-        ClientUserAgent = "WikiSearch-CmdPal/1.0"
+        ClientUserAgent = "Icarus-CmdPalExt/1.0"
     });
 
     private static readonly CommandItem NoResults = new()
@@ -37,7 +37,7 @@ internal sealed partial class IcarusWikiExtensionPage : DynamicListPage, IDispos
     private readonly SemaphoreSlim _searchSemaphore = new(1, 1);
     private readonly Lock _exceptionLock = new();
     private readonly Lock _itemsLock = new();
-    private readonly WikiSite _site;
+    private WikiSite _site;
 
     private volatile List<IListItem> _items = [];
     private CancellationTokenSource? _currentSearchCts;
@@ -47,10 +47,19 @@ internal sealed partial class IcarusWikiExtensionPage : DynamicListPage, IDispos
 
     public IcarusWikiExtensionPage()
     {
-        _site = new WikiSite(Client, new SiteOptions("https://icarus.fandom.com/api.php"));
+        _site = new WikiSite(Client, new SiteOptions(IcarusWikiSettings.Instance.ApiUrl));
+        
+        IcarusWikiSettings.Instance.Settings.SettingsChanged += UpdateSite;
+        
         Title = Resources.icarus_wiki_search;
         ItemsChanged += OnItemsChanged;
         RaiseItemsChanged(0);
+    }
+
+    private void UpdateSite(object sender, Settings args)
+    {
+        ExtensionHost.LogMessage("Settings changed; updating search source.");
+        _site = new WikiSite(Client, new SiteOptions(IcarusWikiSettings.Instance.ApiUrl));
     }
 
     private void OnItemsChanged(object sender, IItemsChangedEventArgs args)
@@ -189,7 +198,8 @@ internal sealed partial class IcarusWikiExtensionPage : DynamicListPage, IDispos
                 Result = CommandResult.Dismiss()
             })
             {
-                Title = result.Title
+                Title = result.Title,
+                Subtitle = result.Description ?? string.Empty,
             });
 
             listItems = ListHelpers.FilterList(listItems, query);
@@ -234,6 +244,8 @@ internal sealed partial class IcarusWikiExtensionPage : DynamicListPage, IDispos
 
         _disposed = true;
 
+        IcarusWikiSettings.Instance.Settings.SettingsChanged -= UpdateSite;
+        
         SetSearchNoUpdate(string.Empty);
         ItemsChanged -= OnItemsChanged;
         lock (_exceptionLock)

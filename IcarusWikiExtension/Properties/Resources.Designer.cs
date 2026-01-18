@@ -175,5 +175,23 @@ namespace IcarusWikiExtension {
                 return ResourceManager.GetString("quick_search_fmt", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wiki Service.
+        /// </summary>
+        internal static string wiki_service {
+            get {
+                return ResourceManager.GetString("wiki_service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Which wiki should the extension use for search?.
+        /// </summary>
+        internal static string wiki_service_subtitle {
+            get {
+                return ResourceManager.GetString("wiki_service_subtitle", resourceCulture);
+            }
+        }
     }
 }
